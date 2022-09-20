@@ -1,3 +1,13 @@
+currentDay = input("enter a day: ")
+if currentDay.lower() == "monday":
+    print("it's Monday :(")
+else:
+    print("At least it's not Monday!")
+currentDay = input("enter a day (again): ")
+if currentDay.lower() in ("saturday", "sunday"):
+    print("It's the weekend!")
+else:
+    print("It's a weekday :(")
 
 hoursWorked = 40
 hourlyRate = 20.5 
@@ -53,7 +63,7 @@ for i in range(positiveInteger,0,-1):
 # part ii
 positiveInteger = 0
 while positiveInteger <=1:
-    inpt = input('Enter a positive integer')
+    inpt = input('Enter a positive integer: ')
     try:
         positiveInteger = int(inpt)
     except ValueError:
