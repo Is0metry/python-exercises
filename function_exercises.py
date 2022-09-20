@@ -171,3 +171,41 @@ print('testing for cumulative_sum')
 print(f'input: [1,1,1], output:{cumulative_sum([1,1,1])}')
 print(f'input: [1,2,3,4], output:{cumulative_sum([1,2,3,4])}')
 print(f'input: [10,-9,8,-7,6,6,6], output:{cumulative_sum([10,-9,8,-7,6,6,6])}')
+#Bonus 1
+def twelveTo24(time):
+    time = time.strip()
+    timeOfDay = 0 if time[time.index('m')-1] == 'a' else 12
+    indexOfColon = time.index(':')
+    hours = int(time[:indexOfColon])
+    minutes = time[indexOfColon+1:indexOfColon+3]
+    return str(timeOfDay + hours)+ ':' + minutes
+print('testing for twelveTo24')
+print(f'input: 10:54am, output: {twelveTo24("10:54am")}')
+print(f'input: 4:00pm, output: {twelveTo24("4:00pm")}')
+print(f'input: 8:48pm, output: {twelveTo24("8:00pm")}')
+print(ord('A'))
+# Bonus 2
+def excel_col_no(column):
+    if len(column) == 1:
+        return ord(column[0]) - 64
+    else:
+        return 26 ** (len(column)-1) * (ord(column[0]) - 64) + excel_col_no(column[1:])
+print('basic testing for excel_col_no')
+print(f'input: A, output:{excel_col_no("A")}')
+print(f'input: AA, output:{excel_col_no("AA")}')
+print(f'input: ZZ, output:{excel_col_no("ZZ")}')
+print(f'input: AAA, output:{excel_col_no("AAA")}')
+print(f'input: ABA, output:{excel_col_no("ABA")}')
+print(f'input: ZZZ, output:{excel_col_no("ZZZ")}')
+comp_test_flag = False # set to True to view output of comprehensive testing
+if comp_test_flag:
+    print('comprehensive testing for excel_col_no')
+    for i in range(0,26):
+        print(f'input: {chr(i+65)}, output:{excel_col_no(chr(i+65))}')
+    for i in range(0,26):
+        for j in range(0,26):
+            print(f'input: {chr(i+65)+chr(j+65)}, output:{excel_col_no(chr(i+65)+chr(j+65))}')
+    for i in range(0,26):
+        for j in range(0,26):
+            for k in range(0,26):
+                print(f'input: {chr(i+65) + chr(j+65) + chr(k+65)}, output:{excel_col_no(chr(i+65) + chr(j+65) + chr(k+65))}')
