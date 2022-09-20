@@ -185,27 +185,27 @@ print(f'input: 4:00pm, output: {twelveTo24("4:00pm")}')
 print(f'input: 8:48pm, output: {twelveTo24("8:00pm")}')
 print(ord('A'))
 # Bonus 2
-def excel_col_no(column):
+def col_index(column):
     if len(column) == 1:
         return ord(column[0]) - 64
     else:
-        return 26 ** (len(column)-1) * (ord(column[0]) - 64) + excel_col_no(column[1:])
+        return 26 ** (len(column)-1) * (ord(column[0]) - 64) + col_index(column[1:])
 print('basic testing for excel_col_no')
-print(f'input: A, output:{excel_col_no("A")}')
-print(f'input: AA, output:{excel_col_no("AA")}')
-print(f'input: ZZ, output:{excel_col_no("ZZ")}')
-print(f'input: AAA, output:{excel_col_no("AAA")}')
-print(f'input: ABA, output:{excel_col_no("ABA")}')
-print(f'input: ZZZ, output:{excel_col_no("ZZZ")}')
+print(f'input: A, output:{col_index("A")}')
+print(f'input: AA, output:{col_index("AA")}')
+print(f'input: ZZ, output:{col_index("ZZ")}')
+print(f'input: AAA, output:{col_index("AAA")}')
+print(f'input: ABA, output:{col_index("ABA")}')
+print(f'input: ZZZ, output:{col_index("ZZZ")}')
 comp_test_flag = False # set to True to view output of comprehensive testing
 if comp_test_flag:
     print('comprehensive testing for excel_col_no')
     for i in range(0,26):
-        print(f'input: {chr(i+65)}, output:{excel_col_no(chr(i+65))}')
+        print(f'input: {chr(i+65)}, output:{col_index(chr(i+65))}')
     for i in range(0,26):
         for j in range(0,26):
-            print(f'input: {chr(i+65)+chr(j+65)}, output:{excel_col_no(chr(i+65)+chr(j+65))}')
+            print(f'input: {chr(i+65)+chr(j+65)}, output:{col_index(chr(i+65)+chr(j+65))}')
     for i in range(0,26):
         for j in range(0,26):
             for k in range(0,26):
-                print(f'input: {chr(i+65) + chr(j+65) + chr(k+65)}, output:{excel_col_no(chr(i+65) + chr(j+65) + chr(k+65))}')
+                print(f'input: {chr(i+65) + chr(j+65) + chr(k+65)}, output:{col_index(chr(i+65) + chr(j+65) + chr(k+65))}')
