@@ -143,24 +143,10 @@ def normalize_name(name):
     #initialize return string
     retStr = ""
     #checks that the name has started in order to check for whitespace
-    nameStart = False
-    #strips any white space off the beginning and end
-    name = name.strip()
     for n in name:
-        #if n is a space AND there has been at least one alphanumeric
-        #character has been noted before this character, it adds
-        # an underscore in place of the space
-        if n == ' ' and nameStart:
-            retStr += '_'
-        # if n is a digit or an underscore, adds it to the return string
-        elif n.isdigit() or n == '_':
+        if n.isalpha() or n.isdigit() or n in (' ','_'):
             retStr += n
-            nameStart = True
-        # if n is an alpha character, adds its lower-case version to the string
-        elif n.isalpha():
-            retStr += n.lower()
-            nameStart = True
-    return retStr
+    return retStr.strip().lower().replace(' ','_')
 if __name__ == '__main__':
     print('testing for normalize_name')
     print(f'input: Normalize Name, output:{normalize_name("Normalize Name")}')
@@ -172,11 +158,11 @@ if __name__ == '__main__':
 def cumulative_sum(arr):
     #initializes return value
     cumSum = 0
-    for a in range(0,len(arr)):
+    for a in enumerate(arr):
         #adds a to the cumulative sum
-        cumSum += arr[a]
+        cumSum += a[1]
         #place3s the cumulative sum in arr[a]
-        arr[a] = cumSum
+        arr[a[0]] = cumSum
     return arr
 if __name__ == '__main__':
     print('testing for cumulative_sum')
