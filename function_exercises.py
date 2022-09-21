@@ -50,7 +50,7 @@ def calculate_tip(bill,tip):
     return round((1+tip) * bill,2)
 if __name__ == '__main__':
     print('calculate_tip testing')
-    print(f'input: (100,.25), output: {calculate_tip(100,.25):1.2f}')
+    print(f'input: (100,.25), output: {calculate_tip(100,.25)}')
     print('')
 #Q6 apply_discount function takes the subtotal of a transaction and the discount to be applied
 #(between 0  and 1) and returns the total minus the discount.
@@ -155,9 +155,11 @@ def normalize_name(name):
         # if n is a digit or an underscore, adds it to the return string
         elif n.isdigit() or n == '_':
             retStr += n
+            nameStart = True
         # if n is an alpha character, adds its lower-case version to the string
         elif n.isalpha():
             retStr += n.lower()
+            nameStart = True
     return retStr
 if __name__ == '__main__':
     print('testing for normalize_name')
