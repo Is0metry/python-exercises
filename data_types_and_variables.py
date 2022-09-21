@@ -1,3 +1,5 @@
+from string import whitespace
+
 
 """
 Identify data types:
@@ -79,73 +81,80 @@ still an empty list (0+0=0)
 #q1
 #takes a list of tuples (movie, daysRented)
 #and prints their sum
-def movieRental(rentals):
-    sum = 0
+def movie_rental(rentals):
+    """takes a list of tuples (movie, daysRented)and prints their sum"""
+    total_sum = 0
     for r in rentals:
-        sum += 3 * r[1]
+        total_sum += 3 * r[1]
         print(f"{r[0]}: {3* r[1]}")
-    print(f"total: {sum}\n\n")
-movieRental([("The Little Mermaid",3),
+    print(f"total: {total_sum}\n\n")
+movie_rental([("The Little Mermaid",3),
 ("Brother Bear", 5),
 ("Hercules",1)])
 
 #q2
 #totalPay takes a list of tuples ($/hr,hrs) and returns the total pay
-def totalPay(timeCard):
-    sumTotal = 0
-    for t in timeCard:
-        sumTotal += t[0] * t[1]
-    return sumTotal
-print(f"Total Pay: ${totalPay([(400,6),(380,4),(350,10)])}.00")
+def total_pay(time_card):
+    '''totalPay takes a list of tuples ($/hr,hrs) and returns the total pay'''
+    sum_total = 0
+    for t in time_card:
+        sum_total += t[0] * t[1]
+    return sum_total
+print(f"Total Pay: ${total_pay([(400,6),(380,4),(350,10)])}.00")
 
 #q3
 # curriculum contains all the courses and how many seats are left (capacity)
 curriculum = {
-'How Algebra Will Save Your Eye':{'startTime':8.0,'endTime':10.0,'capacity':10},
-'Simlish':{'startTime':10.0,'endTime':12.0,'capacity':5},
-'Interpretive Astrology':{ 'startTime':9.0,'endTime':11.0,'capacity':100},
-'Aerobic Antiquing':{'startTime':7.0,'endTime':9,'capacity':3},
-'Corporate Shilling':{'startTime':14.0,'endTime':18.0,'capacity':0}
+'How Algebra Will Save Your Eye':{'start_time':8.0,'end_time':10.0,'capacity':10},
+'Simlish':{'start_time':10.0,'end_time':12.0,'capacity':5},
+'Interpretive Astrology':{ 'start_time':9.0,'end_time':11.0,'capacity':100},
+'Aerobic Antiquing':{'start_time':7.0,'end_time':9,'capacity':3},
+'Corporate Shilling':{'start_time':14.0,'end_time':18.0,'capacity':0}
 }
-# mySchedule is a dictionary with the class name as a key and a tuple of the start and end times represented as float values
+# mySchedule is a dictionary with the class name as a key 
+# and a tuple of the start and end times represented as float values
 # 0.0-24.0
-mySchedule = {'How Algebra Will Save Your Eye':(8.0,10.0)}
+my_schedule = {'How Algebra Will Save Your Eye':(8.0,10.0)}
 # Schedule class
-def scheduleClass(className, schedule):
+def schedule_class(class_name, schedule):
+    """Schedule class takes a class name and the student's current schedule.
+    If they are able to take the class, it returns their new schedule
+    and decriments the class' capacity in 'curriculum.' Otherwise
+    it prints an error"""
     try:
-        classInfo = curriculum[className]
+        class_info = curriculum[class_name]
     except KeyError:
-        print(f'class {className} doesn\'t exist!')
+        print(f'class {class_name} doesn\'t exist!')
         return schedule
-    if classInfo['capacity'] <= 0:
+    if class_info['capacity'] <= 0:
         print("Unable to join! class full!")
         return schedule
     for s in schedule:
-        if s == className:
+        if s == class_name:
             print(f'Already scheduled in class {s}')
             return schedule
-        elif schedule[s][0] >= classInfo['startTime'] and schedule[s][0] < classInfo['endTime']:
-            print(f'scheduling conflict! class {s} starts before {className} ends!')
+        elif schedule[s][0] >= class_info['start_time'] and schedule[s][0] < class_info['end_time']:
+            print(f'scheduling conflict! class {s} starts before {class_name} ends!')
             return schedule
-        elif schedule[s][1] > classInfo['startTime'] and schedule[s][1] <= classInfo['endTime']:
-            print(f'scheduling conflict! class {className} starts before {s} ends!')
+        elif schedule[s][1] > class_info['start_time'] and schedule[s][1] <= class_info['end_time']:
+            print(f'scheduling conflict! class {class_name} starts before {s} ends!')
             return schedule
-    schedule[className] = (classInfo['startTime'],classInfo['endTime'])
-    curriculum[className]['capacity'] -= 1
+    schedule[class_name] = (class_info['start_time'],class_info['end_time'])
+    curriculum[class_name]['capacity'] -= 1
     return schedule
-print(f"{mySchedule}\n\n")
-mySchedule = scheduleClass('Simlish',mySchedule)
-print(f"{mySchedule}\n\n")
-mySchedule = scheduleClass('Interpretive Astrology',mySchedule)
-print(f"{mySchedule}\n\n")
-mySchedule = scheduleClass('Aerobic Antiquing',mySchedule)
-print(f"{mySchedule}\n\n")
-mySchedule = scheduleClass('Corporate Shilling', mySchedule)
-print(f"{mySchedule}\n\n")
-mySchedule = scheduleClass('Data Science', mySchedule)
-print(f"{mySchedule}\n\n")
-mySchedule = scheduleClass('Simlish',mySchedule)
-print(f"{mySchedule}\n\n")
+print(f"{my_schedule}\n\n")
+my_schedule = schedule_class('Simlish',my_schedule)
+print(f"{my_schedule}\n\n")
+my_schedule = schedule_class('Interpretive Astrology',my_schedule)
+print(f"{my_schedule}\n\n")
+my_schedule = schedule_class('Aerobic Antiquing',my_schedule)
+print(f"{my_schedule}\n\n")
+my_schedule = schedule_class('Corporate Shilling', my_schedule)
+print(f"{my_schedule}\n\n")
+my_schedule = schedule_class('Data Science', my_schedule)
+print(f"{my_schedule}\n\n")
+my_schedule = schedule_class('Simlish',my_schedule)
+print(f"{my_schedule}\n\n")
 print(f"{curriculum}\n\n")
 
 #q4
@@ -171,43 +180,44 @@ customers = [
 # check for customer takes a customer dictionary
 # and returns True if they qualify for a discount
 # otherwise it returns false
-def checkForDiscount(customer):
+def check_for_discount(customer):
     if customer['isPremium']:
         return True
-    cartCount = len(customer['cart'])
-    if cartCount > 1:
+    cart_count = len(customer['cart'])
+    if cart_count > 1:
         return True
-    elif cartCount > 0 and customer['cart'][0][1] > 1:
+    elif cart_count > 0 and customer['cart'][0][1] > 1:
         return True
     else:
         return False
 
 for c in customers:
-    retStr = c['name']
-    if checkForDiscount(c):
-        retStr += ' gets a discount!'
+    ret_str = c['name']
+    if check_for_discount(c):
+        ret_str += ' gets a discount!'
     else:
-        retStr += ' does not get a discount :('
-    print(retStr)
+        ret_str += ' does not get a discount :('
+    print(ret_str)
 
 username = 'codeup'
 password = 'notastrongpassword'
 #checks if PW is 5 or more characters
-pwIsFiveOrMoreChars = len(password) > 4
+PW_IS_FIVE_OR_MORE_CHARS = len(password) > 4
 #checks if username is less than 20 characters
-usrLessThanTwentyChars = len(username) < 21
+USR_LESS_THAN_TWENTY_CHARS = len(username) < 21
 #checks username is not equal to password
 #  & vice versa
-pwIsNotUsr = username != password
-import string
-# function to check if first and last are not white space
-def noWSFirstOrLast(str):
-    if str[0] != string.whitespace and str[len(str)-1] != string.whitespace:
+PW_IS_NOT_USR = username != password
+def no_ws_first_or_last(string_to_check):
+    '''function to check if first and last are not white space'''
+    if string_to_check[0] != whitespace and \
+        string_to_check[len(string_to_check)-1] != whitespace:
         return True
     else:
         return False
-firstAndLastNotWS = noWSFirstOrLast(username) and noWSFirstOrLast(password)
-print(f"password is >= 5 chars: {pwIsFiveOrMoreChars}")
-print(f"username is <= 20 chars: {usrLessThanTwentyChars}")
-print(f"Password is not username: {pwIsNotUsr}")
-print(f"First and last of username and password != whitespace: {firstAndLastNotWS}")
+FIRST_AND_LAST_NOT_WS = no_ws_first_or_last(username) \
+    and no_ws_first_or_last(password)
+print(f"password is >= 5 chars: {PW_IS_FIVE_OR_MORE_CHARS}")
+print(f"username is <= 20 chars: {USR_LESS_THAN_TWENTY_CHARS}")
+print(f"Password is not username: {PW_IS_NOT_USR}")
+print(f"First and last of username and password != whitespace: {FIRST_AND_LAST_NOT_WS}")

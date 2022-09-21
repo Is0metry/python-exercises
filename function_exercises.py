@@ -55,7 +55,7 @@ if __name__ == '__main__':
 #Q6 apply_discount function takes the subtotal of a transaction and the discount to be applied
 #(between 0  and 1) and returns the total minus the discount.
 def apply_discount(total, discount):
-    return total - (total * discount)
+    return round(total - (total * discount),2)
 if __name__ == '__main__':
     print('apply_discount testing')
     print(f'input: (100,.25) output:{apply_discount(100,.25):1.2f}')
@@ -63,21 +63,21 @@ if __name__ == '__main__':
 #Q7 handle_commas takes a string of numbers with commas and returns the number as a float
 #if there is a decimal place, or as an integer if there is not
 
-def handle_commas(commaNum):
+def handle_commas(comma_num):
     # the string that will be converted to the output
-    retStr = ""
+    ret_str = ""
     # the flag that tracks the decimal place
-    decPointFlag = False
-    for c in commaNum:
+    dec_point_flag = False
+    for c in comma_num:
         #check if c is a decimal place and that one has not already appeared in the string
-        if c == '.' and not decPointFlag:
+        if c == '.' and not dec_point_flag:
             #set the flag to true to indicate a decimal place has been added
-            decPointFlag = True
+            dec_point_flag = True
             #adds the character to the string
-            retStr += c
+            ret_str += c
         #checks if the character is a digit and, if it is, adds it to the string
         elif c.isdigit():
-            retStr += c
+            ret_str += c
         # if the character is a comma, skip over it
         elif c == ',':
             continue
@@ -85,11 +85,11 @@ def handle_commas(commaNum):
             #throws an error if the number isn't valid
             raise ValueError("Not a valid number")
     # if the number contains a decimal point, returns it as a float
-    if decPointFlag:
-        return float(retStr)
+    if dec_point_flag:
+        return float(ret_str)
     # otherwise returns it as an int
     else:
-        return int(retStr)
+        return int(ret_str)
 if __name__ == '__main__':
     print("handle_commas testing:")
     print(f'input: 100,000,000 , output: {handle_commas("100,000,000")}')
@@ -125,13 +125,13 @@ if __name__ == '__main__':
 #Q9 remove_vowels takes in a string and returns that string without the vowels
 def remove_vowels(sentence):
     #initializes return string
-    retStr = ''
+    ret_str = ''
     #iterates over the string
     for s in sentence:
         # if the string is a consonant, adds it to the return_string
         if is_consonant(s):
-            retStr += s
-    return retStr
+            ret_str += s
+    return ret_str
 if __name__ == '__main__':
     print("remove_vowel testing")
     print(f'input: Thanks for the memories, output: {remove_vowels("Thanks for the Memories")}')
@@ -141,12 +141,12 @@ if __name__ == '__main__':
 #version of that string
 def normalize_name(name):
     #initialize return string
-    retStr = ""
+    ret_str = ""
     #checks that the name has started in order to check for whitespace
     for n in name:
         if n.isalpha() or n.isdigit() or n in (' ','_'):
-            retStr += n
-    return retStr.strip().lower().replace(' ','_')
+            ret_str += n
+    return ret_str.strip().lower().replace(' ','_')
 if __name__ == '__main__':
     print('testing for normalize_name')
     print(f'input: Normalize Name, output:{normalize_name("Normalize Name")}')
@@ -157,12 +157,12 @@ if __name__ == '__main__':
 #Q11 cumulative_sum takes a list and returns the cumulative sum at each number of the array
 def cumulative_sum(arr):
     #initializes return value
-    cumSum = 0
+    cum_sum = 0
     for a in enumerate(arr):
         #adds a to the cumulative sum
-        cumSum += a[1]
+        cum_sum += a[1]
         #place3s the cumulative sum in arr[a]
-        arr[a[0]] = cumSum
+        arr[a[0]] = cum_sum
     return arr
 if __name__ == '__main__':
     print('testing for cumulative_sum')
@@ -172,11 +172,11 @@ if __name__ == '__main__':
 #Bonus 1
 def twelveTo24(time):
     time = time.strip()
-    timeOfDay = 0 if time[time.index('m')-1] == 'a' else 12
-    indexOfColon = time.index(':')
-    hours = int(time[:indexOfColon])
-    minutes = time[indexOfColon+1:indexOfColon+3]
-    return str(timeOfDay + hours)+ ':' + minutes
+    time_of_day = 0 if time[time.index('m')-1] == 'a' else 12
+    index_of_colon = time.index(':')
+    hours = int(time[:index_of_colon])
+    minutes = time[index_of_colon+1:index_of_colon+3]
+    return str(time_of_day + hours)+ ':' + minutes
 if __name__ == '__main__':
     print('testing for twelveTo24')
     print(f'input: 10:54am, output: {twelveTo24("10:54am")}')
