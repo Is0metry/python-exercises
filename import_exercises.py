@@ -30,15 +30,17 @@ for d in data:
     else:
         inactive_users+=1
 grand_total = 0
-max_balance = 0
-min_balance = 0
-for d in data:
-    balance = handle_commas(d['balance'][1:])
-    if balance > max_balance:
-        max_balance = balance
-    if balance < min_balance:
-        min_balance = balance
+max_balance = (0,0)
+min_balance = (0,10000000)
+for d in enumerate(data):
+    balance = handle_commas(d[1]['balance'][1:])
+    if balance > max_balance[1]:
+        max_balance = (d[0],balance)
+    if balance < min_balance[1]:
+        min_balance = (d[0],balance)
     grand_total += balance
+print(f'Minimum Balance of {min_balance[1]} held by {data[min_balance[0]]["name"]}.')
+print(f'Maximum Balance of {max_balance[1]} held by {data[max_balance[0]]["name"]}.')
 avg_balance = grand_total / total_users
 
 favorite_fruits = {}
