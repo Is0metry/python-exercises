@@ -47,7 +47,7 @@ if __name__ == '__main__':
 #Q5 Calculate tip function takes a bill amount and a tip percentage (between 0 and 1)
 # and returns the total bill with tip included
 def calculate_tip(bill,tip):
-    return (1+tip) * bill
+    return round((1+tip) * bill,2)
 if __name__ == '__main__':
     print('calculate_tip testing')
     print(f'input: (100,.25), output: {calculate_tip(100,.25):1.2f}')
