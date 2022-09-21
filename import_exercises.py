@@ -58,4 +58,3 @@ for d in data:
     unreadMessages[name] = int(unread.group())
 for u in unreadMessages.keys():
     print(f'User {u} has {unreadMessages[u]} unread messages')
-
